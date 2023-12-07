@@ -4,5 +4,5 @@ Was performed by @retr0devops.
 
 
 # Credits
-https://github.com/opa334/TrollStore - TrollStore
+https://github.com/opa334/TrollStore - TrollStore,
 https://github.com/opa334/ChOma - ChOma (ChOma is a simple library for parsing and manipulating MachO files and their CMS blobs)
