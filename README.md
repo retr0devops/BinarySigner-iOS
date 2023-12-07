@@ -12,7 +12,7 @@ Dont forget to fix load commands before installation. The final file will be in 
 In the 'Binary' field, enter the full path to the required binary executable file, and then click 'Sign'.
 
 # Support
- iOS 16 (16.0 - 16.x) + TrollStore
+ iOS 16 (16.0 - 17.0) + TrollStore
 
 # Credits
 https://github.com/opa334/TrollStore - TrollStore,
