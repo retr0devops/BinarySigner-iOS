@@ -56,8 +56,6 @@
 }
 
 - (void)signButtonTapped {
-    self.logTextView.text = @"---------------------\n";
-    [self logMessage:@"[*] Fakesign with ldid ..."];
     NSString *plistString = @"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                             "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">"
                             "<plist version=\"1.0\">"
@@ -84,26 +82,15 @@
                             "</plist>";
 
     NSString * binary_path = [self.textField text];
-    NSString * ldid_path = [[binary_path stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"ldid"];
     NSData *plistData = [plistString dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *plistDictionary = [NSPropertyListSerialization propertyListWithData:plistData options:NSPropertyListImmutable format:NULL error:nil];
-    NSString *filePath = [[binary_path stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"entitlements.plist"];
-    [plistDictionary writeToFile:filePath atomically:YES];
-    NSString * signArg = [NSString stringWithFormat:@"-S%@", [[binary_path stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"entitlements.plist"]];
     
     // Checks
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:ldid_path]) {
-        [self logMessageInRed:@"[*] ldid not found in app directory."];
-    }
-    if (![fileManager fileExistsAtPath:filePath]) {
-        [self logMessageInRed:@"[*] entitlements.plist not found in app directory."];
-    }
     
     [self logMessage:@"[*] Binary was fakesigned with ldid."];
     [self logMessage:@"[*] Now using CoreTrust exploit ..."];
     
-     codesign_sign_adhoc([binary_path UTF8String], NO, nil);
+    codesign_sign_adhoc([binary_path UTF8String], NO, plistDictionary);
     
     [self logMessage:@"[*] Binary was signed with AdHoc."];
     [self logMessage:@"[*] Applying CoreTrust bypass ..."];
