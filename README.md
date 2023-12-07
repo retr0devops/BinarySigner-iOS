@@ -10,6 +10,7 @@ Dont forget to fix load commands before installation. The final file will be in 
 
 # Instruction
 In the 'Binary' field, enter the full path to the required binary executable file, and then click 'Sign'.
+Bedore signing you need to set target's binary (executable) rights to R/W. (chmod 777 binary)
 
 # Support
  iOS 16 (16.0 - 17.0) + TrollStore
