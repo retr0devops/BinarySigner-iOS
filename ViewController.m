@@ -35,24 +35,9 @@
 }
 
 - (void)logMessage:(NSString *)message {
-    [self appendMessage:message withColor:[UIColor whiteColor]];
-}
-
-- (void)logMessageInRed:(NSString *)message {
-    [self appendMessage:message withColor:[UIColor redColor]];
-}
-
-- (void)appendMessage:(NSString *)message withColor:(UIColor *)color {
     NSString *currentLogs = self.logTextView.text;
     NSString *newLogs = [NSString stringWithFormat:@"%@\n%@", currentLogs, message];
-    
-    NSMutableAttributedString *attributedMessage = [[NSMutableAttributedString alloc] initWithString:newLogs];
-    
-    if (color) {
-        [attributedMessage addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(currentLogs.length, message.length)];
-    }
-    
-    self.logTextView.attributedText = attributedMessage;
+    self.logTextView.text = newLogs;
 }
 
 - (void)signButtonTapped {
